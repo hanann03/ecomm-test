@@ -9,6 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 
 public class CheckoutPage {
     private WebDriver driver;
@@ -67,14 +72,32 @@ public class CheckoutPage {
     }
 
     public void continueToOverview() {
+        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
         continueButton.click();
+        
+        // Take a screenshot for debugging
+        captureScreenshot("after_continue.png");
+        
+        // Wait for the overview page to load
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("finish")));
+    }
+
+    private void captureScreenshot(String fileName) {
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile, new File(fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void completePurchase() {
+        wait.until(ExpectedConditions.elementToBeClickable(finishButton));
         finishButton.click();
     }
 
     public String getConfirmationMessage() {
+        wait.until(ExpectedConditions.visibilityOf(confirmationMessage));
         return confirmationMessage.getText();
     }
 }
