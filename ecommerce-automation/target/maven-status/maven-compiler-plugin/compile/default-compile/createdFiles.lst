@@ -1,0 +1,8 @@
+pages/CartPage.class
+utils/ConfigReader.class
+pages/CheckoutPage.class
+pages/ProductPage.class
+utils/ScreenshotUtils.class
+pages/HomePage.class
+pages/LoginPage.class
+base/BaseTest.class

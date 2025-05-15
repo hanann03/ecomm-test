@@ -1,0 +1,4 @@
+tests/CartTests.class
+tests/ProductSearchTests.class
+tests/LoginTests.class
+tests/CheckoutTests.class
